@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export const Navbar = () => {
     const [ anchorEl, setAnchorEl ] = useState( null );
@@ -39,7 +40,8 @@ export const Navbar = () => {
                 >
                     Lista de Insumos
                 </Button>
-                <Button color="inherit"> <ShoppingCartIcon></ShoppingCartIcon>Carrito</Button>
+                <Button color="inherit"> <AccountCircleIcon /> Login</Button>
+                <Button color="inherit"> <ShoppingCartIcon /> Carrito</Button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

@@ -1,10 +1,10 @@
 import React from 'react';
-import { Card } from './Card/Card';
+import { ImgMediaCard } from './Card/Card';
 
 export const Inicio = () => {
     return (
         <div className="container">
-            <Card/>
+            <ImgMediaCard />
         </div>
     )
 }
