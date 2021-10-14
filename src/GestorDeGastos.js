@@ -1,13 +1,13 @@
 import React from 'react'
 import { Navbar } from './components/Navbar/Navbar';
-import { Inicio } from './components/Inicio';
+import { ListCards } from './components/ListCards';
 
 
 export const GestorDeGastos = () => {
     return (
         <>
             <Navbar/>
-            <Inicio/>            
+            <ListCards/>            
         </>
     )
 }
