@@ -7,11 +7,14 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { ShCartIcon, VisIcon } from '../Icons/ListIcons';
 import '../styles/card.css';
+import { SwalAlert } from '../Alerts/SwalAlert';
 
-export const ImgMediaCard = ({ alt, url, name, stock = 0, initial }) => {
+
+export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
+
     const [ counter, setCounter ] = useState( initial );
-    const [ isActiveAdd, setIsActiveAdd ] = useState();
-    const [ isActiveRest, setIsActiveRest ] = useState();
+    const [ isActiveAdd, setIsActiveAdd ] = useState( null );
+    const [ isActiveRest, setIsActiveRest ] = useState( null );
 
     useEffect(() => {
         handleActiveAdd();
@@ -21,8 +24,23 @@ export const ImgMediaCard = ({ alt, url, name, stock = 0, initial }) => {
     const handleAdd = () => ( counter < stock ) && setCounter( counter + 1 );
     const handleRest = () => ( counter !== 1 ) && setCounter( counter - 1 );
 
-    const handleActiveAdd = () => ( counter === stock ? setIsActiveAdd( true ) : setIsActiveAdd( false ));
-    const handleActiveRest = () => ( counter === initial ? setIsActiveRest( true ) : setIsActiveRest( false ));
+    const handleActiveAdd = () => { 
+        if( counter === stock ) {
+            SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser mayor al stock del articulo.', 'warning' );
+            setIsActiveAdd( true );
+        } else {
+            setIsActiveAdd( false );
+        }
+    };
+
+    const handleActiveRest = () => {
+        if( counter === initial ) { 
+            SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
+            setIsActiveRest( true );
+        } else { 
+            setIsActiveRest( false );
+        }
+    };
 
     return (
         <Card sx={{ maxWidth: 345 }} className="card">

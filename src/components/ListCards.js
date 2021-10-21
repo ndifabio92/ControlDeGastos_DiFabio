@@ -1,11 +1,38 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ImgMediaCard } from './Card/Card';
+import { supplies } from '../data/supplies';
 
 export const ListCards = () => {
+
+    const [ state, setState ] = useState([ ]);
+
+    useEffect( () => {
+
+        setTimeout(() => {
+            getSupplis
+            .then( data => {
+                setState( data );
+            })
+            .catch( error => {
+                alert('No se pudo conectar con la base de datos');
+            })
+        }, 3000);
+
+    }, []);
+
+    const getSupplis = new Promise(( res, rej ) => {
+        res( supplies );
+    });
+
     return (
         <div className="container">
-            <ImgMediaCard alt= 'pendrive' url= '/assets/images/pendrive.png' name= 'Pendrive' stock={ 10 } initial= { 1 } />
-            <ImgMediaCard alt= 'pendrive' url= '/assets/images/pendrive.png' name= 'Pendrive' stock={ 1 } initial= { 1 } />
+            {
+                state.map( item => (
+                    <ImgMediaCard key= { item.id }
+                        { ...item }
+                    />
+                ))
+            }
         </div>
     )
 }
