@@ -16,7 +16,7 @@ export const ListCards = () => {
             .catch( error => {
                 alert('No se pudo conectar con la base de datos');
             })
-        }, 3000);
+        }, 2000);
 
     }, []);
 

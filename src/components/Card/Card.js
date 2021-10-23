@@ -13,34 +13,9 @@ import { SwalAlert } from '../Alerts/SwalAlert';
 export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
 
     const [ counter, setCounter ] = useState( initial );
-    const [ isActiveAdd, setIsActiveAdd ] = useState( null );
-    const [ isActiveRest, setIsActiveRest ] = useState( null );
 
-    useEffect(() => {
-        handleActiveAdd();
-        handleActiveRest();
-    }, [ counter ] )
-
-    const handleAdd = () => ( counter < stock ) && setCounter( counter + 1 );
-    const handleRest = () => ( counter !== 1 ) && setCounter( counter - 1 );
-
-    const handleActiveAdd = () => { 
-        if( counter === stock ) {
-            SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser mayor al stock del articulo.', 'warning' );
-            setIsActiveAdd( true );
-        } else {
-            setIsActiveAdd( false );
-        }
-    };
-
-    const handleActiveRest = () => {
-        if( counter === initial ) { 
-            SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
-            setIsActiveRest( true );
-        } else { 
-            setIsActiveRest( false );
-        }
-    };
+    const handleAdd = () => ( counter < stock ) ? setCounter( counter + 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser mayor al stock del articulo.', 'warning' );
+    const handleRest = () => ( counter !== initial ) ? setCounter( counter - 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
 
     return (
         <Card sx={{ maxWidth: 345 }} className="card">
@@ -55,11 +30,11 @@ export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
                     { name }
                 </Typography>
                 <div className="card-content-actions">
-                    <Button variant="outlined" color="success" size="small" onClick= { handleAdd } disabled= { isActiveAdd }> 
+                    <Button variant="outlined" color="success" size="small" onClick= { handleAdd } > 
                         + 
                     </Button>
                     <h4> { counter } </h4>
-                    <Button variant="outlined" color="error" size="small" onClick= { handleRest } disabled= { isActiveRest }>
+                    <Button variant="outlined" color="error" size="small" onClick= { handleRest } >
                         - 
                     </Button>
                 </div>
