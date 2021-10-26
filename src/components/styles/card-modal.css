@@ -1,0 +1,13 @@
+.modal-body {
+    display: flex;
+    justify-items: center;
+}
+
+.modal-img {
+    width: 43% !important;
+    margin: auto !important;
+}
+
+.modal-description {
+    text-align: left;
+}
