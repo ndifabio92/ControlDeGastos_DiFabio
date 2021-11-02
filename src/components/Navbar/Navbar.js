@@ -8,6 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { ShCartIcon, AccCircleIcon } from '../Icons/ListIcons';
+import { Link, NavLink } from 'react-router-dom';
 
 export const Navbar = () => {
     const [ anchorEl, setAnchorEl ] = useState( null );
@@ -27,7 +28,7 @@ export const Navbar = () => {
             <AppBar>
                 <Toolbar>
                 <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-                    Control de Gastos
+                    <Link to={'/home'} style={{ textDecoration: 'none', color: 'white' }}>Control de Gastos</Link>
                 </Typography>
                 
                 <Button
@@ -40,8 +41,8 @@ export const Navbar = () => {
                 >
                     Lista de Insumos
                 </Button>
-                <Button color="inherit"> <AccCircleIcon /> Login</Button>
-                <Button color="inherit"> <ShCartIcon /> Carrito</Button>
+                <Button component={ Link } to={'/'} color="inherit"> <AccCircleIcon /> Login </Button>
+                <Button component={ Link } to={'/cart'} color="inherit"> <ShCartIcon /> Carrito</Button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}
@@ -51,9 +52,9 @@ export const Navbar = () => {
                     'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={handleClose}>PC Gaming</MenuItem>
-                    <MenuItem onClick={handleClose}>Notebooks</MenuItem>
-                    <MenuItem onClick={handleClose}>Accesorios</MenuItem>
+                    <MenuItem onClick={handleClose} component={ Link } to={'/pc'}>PC Gaming</MenuItem>
+                    <MenuItem onClick={handleClose} component={ Link } to={'/note'}> Notebooks </MenuItem>
+                    <MenuItem onClick={handleClose} component={ Link } to={'/acc'}>Accesorios</MenuItem>
                 </Menu>
                 </Toolbar>
             </AppBar>

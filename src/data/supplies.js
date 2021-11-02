@@ -6,7 +6,8 @@ export const supplies = [
         stock: 10,
         url: '/assets/images/AsusZenbook-14.jpeg',
         alt: 'Notebook Asus 14 Ryzen 5 5500U',
-        category: 'accesorio',
+        category: 'Notebook',
+        subCategory: 'AMD',
         initial: 1,
         info: {
             Mark: 'Asus Zenbook',
@@ -28,7 +29,8 @@ export const supplies = [
         stock: 1,
         url: '/assets/images/AsusZenbook-14.jpeg',
         alt: 'Dell Inspiron 15.6 I5 11va',
-        category: 'accesorio',
+        category: 'Notebook',
+        subCategory: 'Intel',
         initial: 1,
         info: {
             Mark: 'Dell Inspirion',
@@ -41,6 +43,21 @@ export const supplies = [
             Video: 'Intel Iris Xe Graphics',
             Display: '15.6"',
             Resolution: '1920px x 1080px',
+        },
+    },
+    {
+        id: 3,
+        name: 'Pendrive',
+        price: 20,
+        stock: 1,
+        url: '/assets/images/Pendrive.png',
+        alt: 'Pendrive',
+        category: 'Accesorios',
+        initial: 1,
+        info: {
+            Mark: 'Corsair',
+            Model: 'GS',
+            Storage: '512GB',
         },
     }
 ]
