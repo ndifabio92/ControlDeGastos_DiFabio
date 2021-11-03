@@ -49,7 +49,7 @@ export const Navbar = () => {
                     open={open}
                     onClose={handleClose}
                     MenuListProps={{
-                    'aria-labelledby': 'basic-button',
+                        'aria-labelledby': 'basic-button',
                     }}
                 >
                     <MenuItem onClick={handleClose} component={ Link } to={'/pc'}>PC Gaming</MenuItem>

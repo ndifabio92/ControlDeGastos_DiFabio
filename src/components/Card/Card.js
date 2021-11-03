@@ -9,10 +9,12 @@ import { ShCartIcon, VisIcon } from '../Icons/ListIcons';
 import { SwalAlert } from '../Alerts/SwalAlert';
 import { CardModal } from './CardModal';
 import '../styles/card.css';
+import { Link } from 'react-router-dom';
 
-export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
+export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info, id, category }) => {
 
     const [ counter, setCounter ] = useState( initial );
+    const [ cart, setCart ] = useState([ ]);
     const [ open, setOpen ] = useState( false );
 
     const handleOpen = () => setOpen( true );
@@ -20,6 +22,11 @@ export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
 
     const handleAdd = () => ( counter < stock ) ? setCounter( counter + 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser mayor al stock del articulo.', 'warning' );
     const handleRest = () => ( counter !== initial ) ? setCounter( counter - 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
+
+    const handleAddCart = () => {
+        setCart([ ...cart, { id, category, cant: counter } ]);
+        SwalAlert( 'Aviso', `Se agregaron ${ counter } al carrito de compras` );
+    };
 
     return (
         <>
@@ -47,7 +54,11 @@ export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info }) => {
                 </CardContent>
                 <CardActions className="card-buttons">
                     <Button size="small" onClick={ handleOpen } ><VisIcon /> Detalle</Button>
-                    <Button size="small"><ShCartIcon /> Agregar</Button>
+                    { 
+                        ( cart.length === 0 ) 
+                        ? <Button size="small" onClick= { handleAddCart } ><ShCartIcon /> Agregar</Button> 
+                        : <Button size="small" component= { Link } to= { '/cart' } ><ShCartIcon /> Ir al Carrito </Button> 
+                    }
                 </CardActions>
             </Card>
 
