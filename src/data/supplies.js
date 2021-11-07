@@ -8,7 +8,6 @@ export const supplies = [
         alt: 'Notebook Asus 14 Ryzen 5 5500U',
         category: 'Notebook',
         subCategory: 'AMD',
-        initial: 1,
         info: {
             Mark: 'Asus Zenbook',
             Model: 'Q408UG',
@@ -31,7 +30,6 @@ export const supplies = [
         alt: 'Dell Inspiron 15.6 I5 11va',
         category: 'Notebook',
         subCategory: 'Intel',
-        initial: 1,
         info: {
             Mark: 'Dell Inspirion',
             Model: '',
@@ -45,19 +43,9 @@ export const supplies = [
             Resolution: '1920px x 1080px',
         },
     },
-    {
-        id: 3,
-        name: 'Pendrive',
-        price: 20,
-        stock: 1,
-        url: '/assets/images/Pendrive.png',
-        alt: 'Pendrive',
-        category: 'Accesorios',
-        initial: 1,
-        info: {
-            Mark: 'Corsair',
-            Model: 'GS',
-            Storage: '512GB',
-        },
-    }
-]
+];
+
+
+export const getSupplis = new Promise(( res, rej ) => {
+    res( supplies );
+});

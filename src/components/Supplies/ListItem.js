@@ -1,12 +1,12 @@
 import React from 'react';
-import { ImgMediaCard } from './Card';
+import { Item } from './Item';
 
-export const ListCards = ({ data }) => {
+export const ListItems = ({ data }) => {
     return (
         <div className="container">
             {
                 data.map( item => (
-                    <ImgMediaCard key= { item.id }
+                    <Item key= { item.id }
                         { ...item }
                     />
                 ))

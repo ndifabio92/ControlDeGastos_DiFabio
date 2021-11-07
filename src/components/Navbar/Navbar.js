@@ -8,7 +8,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 
 import { ShCartIcon, AccCircleIcon } from '../Icons/ListIcons';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Navbar = () => {
     const [ anchorEl, setAnchorEl ] = useState( null );
@@ -39,7 +39,7 @@ export const Navbar = () => {
                     aria-expanded={open ? 'true' : undefined}
                     onClick={handleClick}
                 >
-                    Lista de Insumos
+                    Lista de Productos
                 </Button>
                 <Button component={ Link } to={'/'} color="inherit"> <AccCircleIcon /> Login </Button>
                 <Button component={ Link } to={'/cart'} color="inherit"> <ShCartIcon /> Carrito</Button>
@@ -52,9 +52,8 @@ export const Navbar = () => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={handleClose} component={ Link } to={'/pc'}>PC Gaming</MenuItem>
-                    <MenuItem onClick={handleClose} component={ Link } to={'/note'}> Notebooks </MenuItem>
-                    <MenuItem onClick={handleClose} component={ Link } to={'/acc'}>Accesorios</MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/item'}> Productos </MenuItem>
+                    {/* <MenuItem onClick={ handleClose } component={ Link } to={'/item/Accesorios'}>Accesorios</MenuItem> */}
                 </Menu>
                 </Toolbar>
             </AppBar>

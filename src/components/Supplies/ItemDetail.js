@@ -1,35 +1,48 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
+import { Link } from 'react-router-dom';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import { ShCartIcon, VisIcon } from '../Icons/ListIcons';
+import { getSupplis } from '../../data/supplies';
+import { useCartContex } from '../../Context/CardContext';
 import { SwalAlert } from '../Alerts/SwalAlert';
-import { CardModal } from './CardModal';
+import { ShCartIcon } from '../Icons/ListIcons';
 import '../styles/card.css';
-import { Link } from 'react-router-dom';
 
-export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info, id, category }) => {
+export const ItemDetail = () => {
 
+    const initial = 1;
+    const [ state, setState ] = useState([]);
+    const { id } = useParams();
+    const { alt, url, name, category, price, stock } = state;
+    const { cartList, addCartList }  = useCartContex();
     const [ counter, setCounter ] = useState( initial );
-    const [ cart, setCart ] = useState([ ]);
-    const [ open, setOpen ] = useState( false );
-
-    const handleOpen = () => setOpen( true );
-    const handleClose = () => setOpen( false );
 
     const handleAdd = () => ( counter < stock ) ? setCounter( counter + 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser mayor al stock del articulo.', 'warning' );
     const handleRest = () => ( counter !== initial ) ? setCounter( counter - 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
 
     const handleAddCart = () => {
-        setCart([ ...cart, { id, category, cant: counter } ]);
+        addCartList({ id, category, cant: counter, price });
         SwalAlert( 'Aviso', `Se agregaron ${ counter } al carrito de compras` );
     };
 
+    useEffect(() => {
+        getSupplis
+        .then( data => {
+            const newData = ( id ) && data.filter( x => x.id === +id );
+            setState( newData[0] );
+        })
+        .catch( error => {
+            alert('No se pudo conectar con la base de datos');
+        })
+    }, [ id ]);
+    
     return (
-        <>
+        <div className="container">
             <Card sx={{ width: 345 }} className="card">
                 <CardMedia
                     className=" card-img "
@@ -53,16 +66,14 @@ export const ImgMediaCard = ({ alt, url, name, stock = 0, initial, info, id, cat
                     </div>
                 </CardContent>
                 <CardActions className="card-buttons">
-                    <Button size="small" onClick={ handleOpen } ><VisIcon /> Detalle</Button>
                     { 
-                        ( cart.length === 0 ) 
-                        ? <Button size="small" onClick= { handleAddCart } ><ShCartIcon /> Agregar</Button> 
+                        ( cartList.length === 0 ) 
+                        ? 
+                        <Button size="small" onClick= { handleAddCart } ><ShCartIcon /> Agregar</Button> 
                         : <Button size="small" component= { Link } to= { '/cart' } ><ShCartIcon /> Ir al Carrito </Button> 
                     }
                 </CardActions>
             </Card>
-
-            <CardModal open={ open } handleClose={ handleClose } name={ name } url={ url } alt={ alt } info={ info }/>
-        </>
+        </div>
     )
 }

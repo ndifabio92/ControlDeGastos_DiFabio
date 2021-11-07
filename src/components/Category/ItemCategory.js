@@ -3,7 +3,7 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { useHistory } from 'react-router';
 
-export const CategoryCard = ({ name, url, path }) => {
+export const ItemCategory = ({ name, url, path }) => {
     
     const history = useHistory();
     const routeChange = ( path ) => history.push( path );
