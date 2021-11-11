@@ -1,21 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { Loading } from '../Loading/Loading';
+import { getFirestore } from '../services/getFirestore';
 import { ItemCategory } from './ItemCategory';
 
 export const ListCategories = () => {
-    const category = [
-        { id: 1, name: 'Notebook AMD', url: '/assets/images/AMD.png', path: '/item'},
-        { id: 2, name: 'Notebook Intel', url: '/assets/images/Intel.png', path: '/item'},
-        // { id: 3, name: 'Computadoras Escritorio', url: '/assets/images/Pc.jpeg', path: '/item/Notebook'},
-        // { id: 3, name: 'Accesorios', url: '/assets/images/Accesorios.jpeg', path: '/item/Accesorios'}
-    ];
+    const [ state, setState ] = useState([]);
+
+    useEffect( () => {
+        const db = getFirestore();
+        const dbQuery = db.collection('categorys').get();
+        dbQuery
+            .then( resp => 
+                setState( resp.docs.map( 
+                    cat => ({ id: cat.id , ...cat.data() })
+                ))
+            )
+            .catch( error => {
+                alert('No se pudo conectar con la base de datos');
+            });
+    }, [ state ]);
 
     return (
-        <div className="container">
+        <>
             {
-                category.map( item => (
+                state.length === 0 ? <Loading/> :
+                state.map( item => (
                     <ItemCategory key={ item.id } { ...item }/>
                 ))
             }
-        </div>
+        </>
     )
 };

@@ -11,13 +11,22 @@ export const CartContextProvider = ({ children }) => {
         ( !isDuplicate ) && setCartList([ ...cartList, item ]);
     };
 
+    const delCartList = item => {
+        const newCartList = cartList.filter( x => x.id !== item.id && x.category === item.category );
+        setCartList( newCartList );
+    };
+
+    const resetCartList = () => setCartList([]);
+
     const viewList = () => console.alert( cartList );
 
     return (
         <CartContext.Provider value={{
             cartList,
             viewList,
-            addCartList
+            addCartList,
+            delCartList,
+            resetCartList,
         }}>
             {
                 children

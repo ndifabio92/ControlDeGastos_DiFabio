@@ -9,6 +9,7 @@ import MenuItem from '@mui/material/MenuItem';
 
 import { ShCartIcon, AccCircleIcon } from '../Icons/ListIcons';
 import { Link } from 'react-router-dom';
+import { CartWidget } from '../Cart/CartWidget';
 
 export const Navbar = () => {
     const [ anchorEl, setAnchorEl ] = useState( null );
@@ -42,7 +43,7 @@ export const Navbar = () => {
                     Lista de Productos
                 </Button>
                 <Button component={ Link } to={'/'} color="inherit"> <AccCircleIcon /> Login </Button>
-                <Button component={ Link } to={'/cart'} color="inherit"> <ShCartIcon /> Carrito</Button>
+                <Button component={ Link } to={'/cart'} color="inherit"> <CartWidget/> <ShCartIcon /> Carrito</Button>
                 <Menu
                     id="basic-menu"
                     anchorEl={anchorEl}

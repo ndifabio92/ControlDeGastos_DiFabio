@@ -45,6 +45,16 @@ export const supplies = [
     },
 ];
 
+export const categorys = [
+    { id: 1, name: 'Notebook AMD', url: '/assets/images/AMD.png', path: '/item'},
+    { id: 2, name: 'Notebook Intel', url: '/assets/images/Intel.png', path: '/item'},
+    // { id: 3, name: 'Computadoras Escritorio', url: '/assets/images/Pc.jpeg', path: '/item/Notebook'},
+    // { id: 3, name: 'Accesorios', url: '/assets/images/Accesorios.jpeg', path: '/item/Accesorios'}
+];
+
+export const getCategorys = new Promise(( res, rej ) => {
+    res( categorys );
+});
 
 export const getSupplis = new Promise(( res, rej ) => {
     res( supplies );

@@ -4,7 +4,7 @@ import { Navbar } from './components/Navbar/Navbar';
 import { Index } from './components/Supplies/Index';
 import { ItemDetail } from './components/Supplies/ItemDetail';
 import { Home } from './components/Home/Home';
-import { CartContextProvider } from './Context/CardContext';
+import { CartContextProvider } from './context/CardContext';
 import { Cart } from './components/Cart/Cart';
 
 export const App = () => {

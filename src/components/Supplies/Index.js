@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import { ListItems } from './ListItem';
-import { getSupplis } from '../../data/supplies';
+import { Loading } from '../Loading/Loading';
+import { getFirestore } from '../services/getFirestore';
 
 export const Index = () => {
-    const [ state, setState ] = useState([]);
+    const [ state, setState ] = useState([ ]);
 
     useEffect( () => {
-        setTimeout(() => {
-            getSupplis
-            .then( data => {
-                setState( data );
-            })
+        const db = getFirestore();
+        const dbQuery = db.collection('items').get();
+        dbQuery
+            .then( resp => 
+                setState( resp.docs.map( 
+                    item => ({ id: item.id , ...item.data() })
+                ))
+            )
             .catch( error => {
                 alert('No se pudo conectar con la base de datos');
-            })
-        }, 2000);
-    }, []);
+            });
+    }, [ state ]);
 
     return (
-        <>
-            <ListItems data={ state }/>
-        </>
+        <div className="container">
+            {
+                state.length === 0 ? <Loading/> : <ListItems data={ state }/>
+            }
+        </div>
     )
 }
