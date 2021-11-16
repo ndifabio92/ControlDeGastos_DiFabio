@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Loading } from '../Loading/Loading';
-import { getFirestore } from '../services/getFirestore';
+import { getFirestore } from '../../services/getFirestore';
 import { ItemCategory } from './ItemCategory';
 
 export const ListCategories = () => {

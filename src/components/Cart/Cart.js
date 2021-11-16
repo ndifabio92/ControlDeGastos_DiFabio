@@ -1,4 +1,4 @@
-import React, { forwardRef, useState } from 'react';
+import React, { forwardRef } from 'react';
 import MaterialTable from 'material-table';
 import { useCartContex } from '../../context/CardContext';
 import { MessageCart } from '../Utils/MessageCart';
@@ -78,7 +78,7 @@ export const Cart = () => {
                             {
                                 icon: () => <DelIcon/>,
                                 tooltip: 'Eliminar',
-                                onClick: ( event, rowData) => delCartList( rowData ) 
+                                onClick: ( rowData) => delCartList( rowData ) 
                             },
                         ]}
                         options={{

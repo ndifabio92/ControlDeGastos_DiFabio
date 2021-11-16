@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { ListItems } from './ListItem';
-import { Loading } from '../Loading/Loading';
-import { getFirestore } from '../services/getFirestore';
+import { ListItems } from '../Supplies/ListItem';
+import { Loading } from '../Loading/Loading';   
+import { getFirestore } from '../../services/getFirestore';
 
 export const Index = () => {
     const [ state, setState ] = useState([ ]);
 
     useEffect( () => {
         const db = getFirestore();
-        const dbQuery = db.collection('items').get();
+        const dbQuery = db.collection('accesories').get();
         dbQuery
             .then( resp => 
                 setState( resp.docs.map( 
@@ -18,7 +18,7 @@ export const Index = () => {
             .catch( error => {
                 alert('No se pudo conectar con la base de datos');
             });
-    }, [ state ]);
+    }, [ ]);
 
     return (
         <div className="container">

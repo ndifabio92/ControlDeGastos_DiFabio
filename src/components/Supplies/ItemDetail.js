@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 import { useCartContex } from '../../context/CardContext';
 import { SwalAlert } from '../Alerts/SwalAlert';
 import { ShCartIcon } from '../Icons/ListIcons';
-import { getFirestore } from '../services/getFirestore';
+import { getFirestore } from '../../services/getFirestore';
 import '../styles/card.css';
 
 export const ItemDetail = () => {
@@ -18,7 +18,7 @@ export const ItemDetail = () => {
     const initial = 1;
     const [ state, setState ] = useState([ ]);
     const [ localList, setLocalList ] = useState([ ]);
-    const { id } = useParams();
+    const { cat, id } = useParams();
     const { alt, url, name, category, price, stock } = state;
     const { addCartList }  = useCartContex();
     const [ counter, setCounter ] = useState( initial );
@@ -34,7 +34,7 @@ export const ItemDetail = () => {
 
     useEffect(() => {
         const db = getFirestore();
-        const dbQuery = db.collection('items').doc( id ).get();
+        const dbQuery = db.collection( cat ).doc( id ).get();
         dbQuery
             .then( resp => 
                 setState( resp.data() )
@@ -59,7 +59,7 @@ export const ItemDetail = () => {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div" className="card-title">
-                            { name }
+                            { name } - $ { price }
                         </Typography>
                         <div className="card-content-actions">
                             <Button variant="outlined" color="success" size="small" onClick= { handleAdd } > 

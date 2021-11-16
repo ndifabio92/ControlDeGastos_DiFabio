@@ -53,8 +53,9 @@ export const Navbar = () => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={ handleClose } component={ Link } to={'/item'}> Productos </MenuItem>
-                    {/* <MenuItem onClick={ handleClose } component={ Link } to={'/item/Accesorios'}>Accesorios</MenuItem> */}
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/notebooks'}> Notebooks </MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/computers'}> Computadoras </MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/accesories'}> Accesorios </MenuItem>
                 </Menu>
                 </Toolbar>
             </AppBar>
