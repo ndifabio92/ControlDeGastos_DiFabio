@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ListItems } from '../Supplies/ListItem';
+import { ListItems } from '../Supplies/ListItems';
 import { Loading } from '../Loading/Loading';   
 import { getFirestore } from '../../services/getFirestore';
 
