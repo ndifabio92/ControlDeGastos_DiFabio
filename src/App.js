@@ -15,7 +15,7 @@ export const App = () => {
                     <Navbar/>
                     <Switch>
                         <Route exact path='/category/:cat' component={ Index }/>
-                        <Route exact path='/item/:cat/:id' component={ ItemDetail }/>
+                        <Route exact path='/category/item/:cat/:id' component={ ItemDetail }/>
                         <Route exact path='/home' component={ Home }/>
                         <Route exact path='/cart' component={ Cart }></Route>
                         <Route exact path='/' component={ Home }/>
