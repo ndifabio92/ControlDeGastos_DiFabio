@@ -10,8 +10,9 @@
 }
 
 .card-img {
-    width: 43% !important;
+    width: auto !important;
     margin: auto !important;
+    margin-top: 5% !important;
 }
 
 .card-modal {
