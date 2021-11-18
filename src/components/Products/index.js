@@ -2,13 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { ListItems } from '../Supplies/ListItems';
 import { Loading } from '../Loading/Loading';   
 import { getFirestore } from '../../services/getFirestore';
+import { useParams } from 'react-router';
 
 export const Index = () => {
     const [ state, setState ] = useState([ ]);
+    const { cat } = useParams();
 
     useEffect( () => {
         const db = getFirestore();
-        const dbQuery = db.collection('notebooks').get();
+        const dbQuery = db.collection( cat ).get();
         dbQuery
             .then( resp => 
                 setState( resp.docs.map( 
