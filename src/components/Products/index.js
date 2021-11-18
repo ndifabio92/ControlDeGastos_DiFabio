@@ -20,7 +20,7 @@ export const Index = () => {
             .catch( error => {
                 alert('No se pudo conectar con la base de datos');
             });
-    }, [ ]);
+    }, [ cat ]);
 
     return (
         <div className="container">

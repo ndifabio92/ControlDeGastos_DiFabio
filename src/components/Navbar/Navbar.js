@@ -53,9 +53,9 @@ export const Navbar = () => {
                         'aria-labelledby': 'basic-button',
                     }}
                 >
-                    <MenuItem onClick={ handleClose } component={ Link } to={'category/notebooks'}> Notebooks </MenuItem>
-                    <MenuItem onClick={ handleClose } component={ Link } to={'category/computers'}> Computadoras </MenuItem>
-                    <MenuItem onClick={ handleClose } component={ Link } to={'category/accesories'}> Accesorios </MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/category/notebooks'}> Notebooks </MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/category/computers'}> Computadoras </MenuItem>
+                    <MenuItem onClick={ handleClose } component={ Link } to={'/category/accesories'}> Accesorios </MenuItem>
                 </Menu>
                 </Toolbar>
             </AppBar>
