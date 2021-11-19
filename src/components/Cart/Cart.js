@@ -17,7 +17,6 @@ import Remove from '@material-ui/icons/Remove';
 import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
-import { DelIcon } from '../Icons/ListIcons';
 import { Button } from '@material-ui/core';
 
 const icons = {
@@ -63,6 +62,18 @@ export const Cart = () => {
                         <Button variant="contained" size="small" onClick= { resetCartList }> Eliminar el Carrito</Button>
                     </div>
                     <MaterialTable
+                        localization= {{
+                            header: { actions: "Acciones " },
+                            body: {
+                                deleteTooltip: "Eliminar",
+                                editRow: { 
+                                    deleteText: "Esta seguro que desea eliminar?",
+                                    cancelTooltip: "Cancelar",
+                                    saveTooltip: "Aceptar"
+                                }
+                            }
+                        }}
+                        data={ cartList }
                         icons= { icons }
                         title="Carrito de compras"
                         columns={[
@@ -73,14 +84,12 @@ export const Cart = () => {
                             { title: 'Precio', field: 'price' },
                             { title: 'SubTotal', field: 'subTotal' },
                         ]}
-                        data={ cartList }
-                        actions={[
-                            {
-                                icon: () => <DelIcon/>,
-                                tooltip: 'Eliminar',
-                                onClick: ( rowData) => delCartList( rowData ) 
-                            },
-                        ]}
+                        editable = {{
+                            onRowDelete: item => new Promise(( resolve, reject ) => {
+                                delCartList( item );
+                                resolve();
+                            }),
+                        }}
                         options={{
                             actionsColumnIndex: -1
                         }}

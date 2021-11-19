@@ -7,16 +7,19 @@ export const CartContextProvider = ({ children }) => {
     const [ cartList, setCartList ] = useState([ ]);
 
     const addCartList = item => {
-        const isDuplicate = cartList.find( x => x.id === item.id && x.category === item.category );
-        ( !isDuplicate ) && setCartList([ ...cartList, item ]);
+        const isExist = cartList.find( x => x.id === item.id );
+        if( isExist ) {
+            const oldData = cartList.filter( x => x.id === item.id );
+            oldData[0].cant += item.cant;
+            oldData[0].subTotal += item.subTotal
+        } else {
+            setCartList([ ...cartList, item ]);
+        }
     };
 
-    const delCartList = item => {
-        const newCartList = cartList.filter( x => x.id !== item.id && x.category === item.category );
-        setCartList( newCartList );
-    };
+    const delCartList = item => setCartList( cartList.filter( x => x.id !== item.id ));
 
-    const resetCartList = () => setCartList([]);
+    const resetCartList = () => setCartList([ ]);
 
     const viewList = () => console.alert( cartList );
 
