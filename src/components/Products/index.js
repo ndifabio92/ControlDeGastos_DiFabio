@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router';
 import { ListItems } from '../Supplies/ListItems';
 import { Loading } from '../Loading/Loading';   
 import { getFirestore } from '../../services/getFirestore';
-import { useParams } from 'react-router';
 
 export const Index = () => {
     const [ state, setState ] = useState([ ]);

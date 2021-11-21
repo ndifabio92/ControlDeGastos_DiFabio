@@ -1,7 +1,8 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useState } from 'react';
 import MaterialTable from 'material-table';
 import { useCartContex } from '../../context/CardContext';
 import { MessageCart } from '../Utils/MessageCart';
+import { FormCart } from './FormCart';
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowDownward from '@material-ui/icons/ArrowDownward';
 import Check from '@material-ui/icons/Check';
@@ -18,6 +19,8 @@ import SaveAlt from '@material-ui/icons/SaveAlt';
 import Search from '@material-ui/icons/Search';
 import ViewColumn from '@material-ui/icons/ViewColumn';
 import { Button } from '@material-ui/core';
+
+import '../styles/cart.css';
 
 const icons = {
     Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -40,14 +43,8 @@ const icons = {
 };
 
 export const Cart = () => {
-    const { cartList, delCartList, resetCartList }  = useCartContex();
-    const getPriceTotal = () => {
-        let total = 0;
-        for( const { subTotal } of cartList ) {
-            total+= subTotal;
-        }
-        return total;
-    };
+    const { cartList, delCartList, resetCartList, getPriceTotal }  = useCartContex();
+    const [ openForm , setOpenForm ] = useState( false );
 
     return (
         <div className="container-cart">
@@ -58,9 +55,15 @@ export const Cart = () => {
                 :
                 <>
                     <div style={{ marginBottom:'1%' }}>
-                        <h1>{`Monto total: $ ${ getPriceTotal() }`}</h1>
-                        <Button variant="contained" size="small" onClick= { resetCartList }> Eliminar el Carrito</Button>
+                        <h1>{ `Monto total: $ ${ getPriceTotal() }` }</h1>
+                        <div className="action-button">
+                            <Button variant="contained" color="secondary" size="small" onClick= { resetCartList }> Eliminar el Carrito</Button>
+                            <Button variant="contained" color="primary" size="small" onClick= { e => setOpenForm( true )}> Finalizar Compra </Button>
+                        </div>
                     </div>
+                    {
+                        openForm && <FormCart />
+                    }
                     <MaterialTable
                         localization= {{
                             header: { actions: "Acciones " },
@@ -79,7 +82,6 @@ export const Cart = () => {
                         columns={[
                             { title: 'ID', field: 'id', hidden: true },
                             { title: 'Nombre', field: 'name' },
-                            { title: 'Categoria', field: 'category' },
                             { title: 'Cantidad', field: 'cant'},
                             { title: 'Precio', field: 'price' },
                             { title: 'SubTotal', field: 'subTotal' },
@@ -95,7 +97,6 @@ export const Cart = () => {
                         }}
                     />
                 </>
-                
             }
         </div>
     )

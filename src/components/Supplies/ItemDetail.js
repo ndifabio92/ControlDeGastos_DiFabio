@@ -27,7 +27,7 @@ export const ItemDetail = () => {
     const handleRest = () => ( counter !== initial ) ? setCounter( counter - 1 ) : SwalAlert( 'Alerta', 'La cantidad seleccionada no puede ser menor al stock del articulo.', 'warning' );
 
     const handleAddCart = () => {
-        addCartList({ id, category, cant: counter, price, name , subTotal: counter * price });
+        addCartList({ id, category, cant: counter, price, name , subTotal: counter * price, stock });
         setLocalList({ id, category, cant: counter, price, name , subTotal: counter * price });
         SwalAlert( 'Aviso', `Se agregaron ${ counter } al carrito de compras` );
     };
@@ -42,7 +42,7 @@ export const ItemDetail = () => {
             .catch( error => {
                 alert('No se pudo conectar con la base de datos');
             });
-    }, [ id ]);
+    }, [ id, cat ]);
     
     return (
         <div className="container">

@@ -1,0 +1,12 @@
+.action-button {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.form {
+    margin-bottom: 1%;
+}
+
+.form > div {
+    margin-right: 1%;
+}

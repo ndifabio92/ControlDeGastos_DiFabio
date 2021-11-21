@@ -23,6 +23,14 @@ export const CartContextProvider = ({ children }) => {
 
     const viewList = () => console.alert( cartList );
 
+    const getPriceTotal = () => {
+        let total = 0;
+        for( const { subTotal } of cartList ) {
+            total+= subTotal;
+        }
+        return total;
+    };
+
     return (
         <CartContext.Provider value={{
             cartList,
@@ -30,6 +38,7 @@ export const CartContextProvider = ({ children }) => {
             addCartList,
             delCartList,
             resetCartList,
+            getPriceTotal,
         }}>
             {
                 children
